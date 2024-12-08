@@ -41,67 +41,66 @@ public class Laborator9GhilezanMadalinApplication implements CommandLineRunner {
             System.out.print("Alegere: ");
 
             optiune = scanner.nextInt();
-            scanner.nextLine(); // Consumăm linia rămasă
+            scanner.nextLine();
 
             switch (optiune) {
                 case 1:
-                    System.out.print("Numărul de înmatriculare: ");
+                    System.out.print("Numarul de inmatriculare: ");
                     String numarInmatriculare = scanner.nextLine();
                     System.out.print("Marca: ");
                     String marca = scanner.nextLine();
-                    System.out.print("Anul fabricației: ");
+                    System.out.print("Anul fabricatiei: ");
                     int anulFabricatiei = scanner.nextInt();
-                    scanner.nextLine(); // Consumăm linia rămasă
+                    scanner.nextLine();
                     System.out.print("Culoare: ");
                     String culoare = scanner.nextLine();
-                    System.out.print("Număr km: ");
+                    System.out.print("Numar km: ");
                     int numarKm = scanner.nextInt();
                     scanner.nextLine();
-
                     Masina masina = new Masina(marca,anulFabricatiei,culoare,numarInmatriculare,numarKm);
                     masinaService.adaugaMasina(masina);
-                    System.out.println("Mașina a fost adăugată.");
+                    System.out.println("Masina a fost adaugata.");
                     break;
                 case 2:
-                    System.out.print("Numărul de înmatriculare al mașinii de șters: ");
+                    System.out.print("Numarul de inmatriculare al masinii de sters: ");
                     String numarStergere = scanner.nextLine();
                     masinaService.stergeMasina(numarStergere);
-                    System.out.println("Mașina a fost ștearsă.");
+                    System.out.println("Masina a fost stearsa.");
                     break;
                 case 3:
-                    System.out.print("Numărul de înmatriculare pentru căutare: ");
+                    System.out.print("Numarul de inmatriculare pentru cautare: ");
                     String numarCautare = scanner.nextLine();
                     masinaService.cautaMasina(numarCautare).ifPresentOrElse(
-                            m -> System.out.println("Mașina găsită: " + m.getMarca() + " " + m.getAnulFabricatiei()),
-                            () -> System.out.println("Mașina nu a fost găsită.")
+                            m -> System.out.println("Masina gasita: " + m.getMarca() + " " + m.getAnulFabricatiei()),
+                            () -> System.out.println("Masina nu a fost gasita.")
                     );
                     break;
                 case 4:
                     List<Masina> masini = masinaService.listeazaMasini();
-                    System.out.println("Lista mașinilor din baza de date:");
+                    System.out.println("Lista masinilor din baza de date:");
                     masini.forEach(m -> System.out.println(m.getNumarInmatriculare() + " - " + m.getMarca()+" - "+m.getAnulFabricatiei()+" - "+m.getCuloare()+" - "+m.getNumarKm()));
                     break;
                 case 5:
                     System.out.print("Introdu marca: ");
                     String marcaCautata = scanner.nextLine();
-                    System.out.println("Numărul de mașini cu această marcă: " + masinaService.numarMasiniCuMarca(marcaCautata));
+                    System.out.println("Numarul de masini cu aceasta marca: " + masinaService.numarMasiniCuMarca(marcaCautata));
                     break;
                 case 6:
-                    System.out.println("Numărul de mașini cu sub 100.000 km: " + masinaService.numarMasiniSub100k());
+                    System.out.println("Numarul de masini cu sub 100.000 km: " + masinaService.numarMasiniSub100k());
                     break;
                 case 7:
                     List<Masina> masiniNoi = masinaService.masiniMaiNoiDe5Ani();
-                    System.out.println("Lista mașinilor mai noi de 5 ani:");
+                    System.out.println("Lista masinilor mai noi de 5 ani:");
                     masiniNoi.forEach(m -> System.out.println(m.getNumarInmatriculare() + " - " + m.getMarca()));
                     break;
                 case 8:
-                    masinaService.incarcaDateDinSQL(); // Încarcă datele din data.sql
+                    masinaService.incarcaDateDinSQL();
                     break;
                 case 0:
-                    System.out.println("La revedere!");
+                    System.out.println("Iesire!");
                     break;
                 default:
-                    System.out.println("Opțiune invalidă. Încearcă din nou.");
+                    System.out.println("Optiune iNvalida!");
             }
         } while (optiune != 0);
 

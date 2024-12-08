@@ -1,5 +1,4 @@
 package org.example.laborator9ghilezanmadalin.Masini;
-
 import jakarta.persistence.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -66,6 +65,6 @@ public class Masina {
         this.numarKm = numarKm;
     }
     public interface MasinaRepository extends JpaRepository<Masina, Long> {
-        void deleteByNumarInmatriculare(String numarInmatriculare);
+        void stergere_nr_inmatriculare(String numarInmatriculare);
     }
 }

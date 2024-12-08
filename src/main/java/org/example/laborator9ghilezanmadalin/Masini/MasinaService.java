@@ -24,9 +24,9 @@ public class MasinaService {
                     .collect(Collectors.joining("\n"));
 
             jdbcTemplate.execute(sql);
-            System.out.println("Datele au fost încărcate cu succes din data.sql.");
+            System.out.println("Datele au fost incarcate in sql.");
         } catch (Exception e) {
-            System.err.println("A apărut o eroare la încărcarea datelor: " + e.getMessage());
+            System.err.println("Datele nu s au incarcat in sql: " + e.getMessage());
         }
     }
     public Masina adaugaMasina(Masina masina) {
@@ -34,19 +34,19 @@ public class MasinaService {
     }
 
     public void stergeMasina(String numarInmatriculare) {
-        Optional<Masina> masinaOptional = masinaRepository.findByNumarInmatriculare(numarInmatriculare);
+        Optional<Masina> masinaOptional = masinaRepository.gaseste_nr_inmatriculare(numarInmatriculare);
 
         if (masinaOptional.isPresent()) {
-            Masina masina = masinaOptional.get(); // Extragem valoarea din Optional
-            masinaRepository.delete(masina); // Ștergem mașina
-            System.out.println("Mașina cu numărul de înmatriculare " + numarInmatriculare + " a fost ștearsă.");
+            Masina masina = masinaOptional.get();
+            masinaRepository.delete(masina);
+            System.out.println("Masina cu numarul de inmatriculare " + numarInmatriculare + " a fost stearsa.");
         } else {
-            System.out.println("Nu a fost găsită nicio mașină cu acest număr de înmatriculare.");
+            System.out.println("Nu a fost gasita nici o masina cu acest numar de inmatriculare.");
         }
     }
 
     public Optional<Masina> cautaMasina(String numarInmatriculare) {
-        return masinaRepository.findByNumarInmatriculare(numarInmatriculare);
+        return masinaRepository.gaseste_nr_inmatriculare(numarInmatriculare);
     }
 
     public List<Masina> listeazaMasini() {
@@ -54,16 +54,16 @@ public class MasinaService {
     }
 
     public long numarMasiniCuMarca(String marca) {
-        return masinaRepository.findByMarca(marca).size();
+        return masinaRepository.gaseste_dupa_marca(marca).size();
     }
 
     public long numarMasiniSub100k() {
-        return masinaRepository.findByNumarKmLessThan(100000).size();
+        return masinaRepository.km_mai_putini(100000).size();
     }
 
     public List<Masina> masiniMaiNoiDe5Ani() {
         int anulActual = 2024;
-        return masinaRepository.findByAnulFabricatieiGreaterThan(anulActual - 5);
+        return masinaRepository.an_fab_mai_mare(anulActual - 5);
     }
 
 }

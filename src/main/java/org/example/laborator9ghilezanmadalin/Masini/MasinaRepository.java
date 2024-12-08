@@ -8,13 +8,13 @@ import java.util.Optional;
 @Repository
 public interface MasinaRepository extends JpaRepository<Masina, Integer> {
 
-    Optional<Masina> findByNumarInmatriculare(String numarInmatriculare);
+    Optional<Masina> gaseste_nr_inmatriculare(String numarInmatriculare);
 
-    void deleteByNumarInmatriculare(String numarInmatriculare);
-    List<Masina> findByMarca(String marca);
+    void stergere_dupa_nr(String numarInmatriculare);
+    List<Masina> gaseste_dupa_marca(String marca);
 
-    List<Masina> findByNumarKmLessThan(Integer numarKm);
+    List<Masina> km_mai_putini(Integer numarKm);
 
-    List<Masina> findByAnulFabricatieiGreaterThan(Integer anul);
+    List<Masina> an_fab_mai_mare(Integer anul);
 
 }
